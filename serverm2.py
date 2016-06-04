@@ -36,13 +36,19 @@ def clientthread(conn):
          
         #Receiving from client
 		data = conn.recv(1024)
+		loop1 = len(arr)
+		while loop1:
+			loop1 -= 1
+			if conn == arr[loop1]['con']:
+				nam = arr[loop1]['name1']	
 		sendto,mesg = data.split(':',2)
+		msg1 = '\n' + nam + ':' + mesg
 		loop1 = len(arr)
 		while loop1:
 			loop1 -= 1
 			if sendto == arr[loop1]['name1']:
 				conn = arr[loop1]['con']
-				conn.send(data)
+				conn.send(msg1)
 			#conn = arr[0]['con']
 		#elif conn == arr[1]['con']:
 			#conn = arr[0]['con']
@@ -84,4 +90,3 @@ while 1:
     i += 1
  
 s.close()
-
